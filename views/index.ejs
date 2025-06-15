@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show books</title>
+</head>
+<body >
+  <div class="add-book">
+    <a href="/add">Click Toadd Book</a>
+  </div>
+  <% books.forEach(book => { %>
+  <div class="book">
+    <img src="<%= book.cover_url %>" alt="Cover" />
+    <h2><%= book.title %></h2>
+    <p>by <%= book.author %></p>
+    <p><%= book.review %></p>
+    <p>Rating: <%= book.rating %>/5</p>
+    <p>Read on: <%= book.date_read.toDateString() %></p>
+  </div>
+<% }) %>
+</body>
+</html>
