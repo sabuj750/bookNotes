@@ -4,25 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book Notes</title>
-  <link rel="stylesheet" href="styles/new.css">
+  <link rel="stylesheet" href="/styles/new.css">
 </head>
 <body >
- <form action="/add" method="post">
+ <form action="<%= locals.book ? `/edit/${book.id}` : '/add' %>" method="post">
     <h1>Add a New Book</h1>
     <label for="title">Title:</label>
-    <input type="text" id="title" name="title" placeholder="book title" required>
+    <input type="text" id="title" name="title" placeholder="book title" value="<%= locals.book ? book.title : '' %>" required>
 
     <label for="author">Author:</label>
-    <input type="text" id="author" name="author" placeholder="Author name" required>
+    <input type="text" id="author" name="author" placeholder="Author name" value="<%= locals.book ? book.author : '' %>" required>
 
     <label for="review">Review:</label>
-    <textarea id="review" name="review" placeholder="your review" rows="4" required></textarea>
+    <textarea id="review" name="review" placeholder="your review" rows="4" required><%= locals.book ? book.review : '' %></textarea>
 
     <label for="rating">Rating (1-5):</label>
-    <input type="number" id="rating" name="rating" min="1" max="5" required>
+    <input type="number" id="rating" name="rating" min="1" max="5" value="<%= locals.book ? book.rating : '' %>" required>
 
     <label for="date_read">Date Read:</label>
-    <input type="date" id="date_read" name="date_read" required>
+    <input type="date" id="date_read" name="date_read" value="<%= locals.book ? book.date_read.toISOString().slice(0,10) : '' %>" required>
 
     <button type="submit">Add Book</button>
   </form>
