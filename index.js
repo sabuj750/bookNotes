@@ -14,9 +14,10 @@ db.connect();
 
 const app = express();
 const port = 3000;
-
+app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
 
 app.get('/', async (req, res) => {
   try{
@@ -53,7 +54,19 @@ app.post("/add" , async (req , res) => {
     console.error("Error adding book:", error);
     res.status(500).send("Internal Server Error");
   }
-})
+});
+
+app.delete("/delete/:id", async (req , res) => {
+  try{
+    const id = req.params.id;
+    await db.query("DELETE FROM books WHERE id = $1",[id]);
+    res.status(200).json({ success: true });
+    // res.status(200).send("Book deleted successfully");
+  }catch(error){
+    console.error("Error deleting book:", error);
+    res.status(500).send("Internal Server Error!!");
+  }
+});
 
 
 app.listen(port, () => {

@@ -1,16 +1,51 @@
 <%- include('./partials/header') %>
-<h1>Book Details</h1>
-  <div class="add-book">
-    <a href="/add">Click Toadd Book</a>
+<div class="container">
+  <header>
+    <h1>📚 My Book Collection</h1>
+    <div class="add-book">
+      <a href="/add">✨ Add New Book</a>
+    </div>
+  </header>
+  <div class="books-grid">
+    <% books.forEach(book => { %>
+    <div class="book">
+      <div class="book-content">
+        <img src="<%= book.cover_url %>" alt="Book Cover" />
+        <div class="book-info">
+          <h2><%= book.title %></h2>
+          <p class="book-author"><%= book.author %></p>
+          <p class="book-review"><%= book.review %></p>
+          <div class="book-meta">
+            <div class="rating">
+              <div class="stars">
+                <% for(let i = 0; i < 5; i++) { %> <% if(i < book.rating) { %>
+                <div class="star"></div>
+                <% } else { %>
+                <div class="star empty"></div>
+                <% } %> <% } %>
+              </div>
+              <span><%= book.rating %>/5</span>
+            </div>
+            <div class="date-read">Apr 8, 2024</div>
+          </div>
+          <div class="book-actions">
+            <a href="/edit/<%= book.id %>" class="action-btn edit-btn"
+              >✏️ Edit</a
+            >
+            <button
+              class="action-btn delete-btn"
+              onclick="deleteBook(<%= book.id %>)"
+            >
+              🗑️ Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }) %>
   </div>
-  <% books.forEach(book => { %>
-  <div class="book">
-    <img src="<%= book.cover_url %>" alt="Cover" />
-    <h2><%= book.title %></h2>
-    <p>by <%= book.author %></p>
-    <p><%= book.review %></p>
-    <p>Rating: <%= book.rating %>/5</p>
-    <p>Read on: <%= book.date_read.toDateString() %></p>
-  </div>
-<% }) %>
-<%- include('./partials/footer') %>
+  <footer>
+    <p>&copy; 2024 My Book Collection. Happy Reading! 📖</p>
+  </footer>
+</div>
+ <%- include('./partials/footer') %>

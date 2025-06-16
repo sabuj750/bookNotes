@@ -1,5 +1,13 @@
-<%- include('./partials/header') %>
-  <form action="/add" method="post">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Notes</title>
+  <link rel="stylesheet" href="styles/new.css">
+</head>
+<body >
+ <form action="/add" method="post">
     <h1>Add a New Book</h1>
     <label for="title">Title:</label>
     <input type="text" id="title" name="title" placeholder="book title" required>
@@ -17,6 +25,6 @@
     <input type="date" id="date_read" name="date_read" required>
 
     <button type="submit">Add Book</button>
-
   </form>
-<%- include('./partials/footer') %>
+</body>
+</html>
